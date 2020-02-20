@@ -1,3 +1,4 @@
+import colors from 'vuetify/es5/util/colors'
 import EventService from './services/EventService.js'
 
 export default {
@@ -46,11 +47,20 @@ export default {
     '@nuxtjs/axios'
   ],
   vuetify: {
-    font: {
-      family: 'Roboto'
-    },
-    icons: {
-      iconfont: 'mdi' // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+    customVariables: ['~/assets/variables.scss'],
+    theme: {
+      dark: false,
+      themes: {
+        light: {
+          primary: '#1976D2',
+          secondary: '#424242',
+          accent: '#82B1FF',
+          error: '#FF5252',
+          info: '#2196F3',
+          success: '#4CAF50',
+          warning: '#FFC107'
+        }
+      }
     }
   },
   /*

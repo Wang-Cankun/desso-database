@@ -1,29 +1,18 @@
 <template>
-  <div class="nav">
-    <!--<nuxt-link to="/" class="brand">
-      DESSO database
-    </nuxt-link>
-    <nav>
-      <nuxt-link to="/">
-        List
-      </nuxt-link>
-      |
-      <nuxt-link to="/event/create">
-        Create
-      </nuxt-link>
-    </nav>-->
-
+  <v-app id="keep">
     <v-app-bar app clipped-left color="blue">
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
-      <span class="title ml-3 mr-5">DESSO database</span>
-
+      <!--<v-app-bar-nav-icon @click="drawer = !drawer" />-->
+      <span class="title ml-3 mr-5"
+        >DESSO&nbsp;<span class="font-weight-light">database</span></span
+      >
       <v-text-field
-        flat
         solo-inverted
-        placeholder="Search"
-        class="d-sm-none-and-down"
+        flat
+        hide-details
+        label="Search"
         prepend-inner-icon="mdi-magnify"
-      ></v-text-field>
+      />
+
       <v-spacer />
     </v-app-bar>
 
@@ -46,7 +35,7 @@
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title class="black--text">
+              <v-list-item-title class="grey--text">
                 {{ item.text }}
               </v-list-item-title>
             </v-list-item-content>
@@ -54,7 +43,36 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-  </div>
+
+    <v-content>
+      <v-container>
+        <nuxt />
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
-<style scoped></style>
+<script>
+export default {
+  props: {
+    source: String
+  },
+  data: () => ({
+    drawer: null,
+    items: [
+      { icon: 'mdi-home', text: 'Home', url: '/' },
+      { icon: 'mdi-table', text: 'Browse', url: '/browse' },
+      { icon: 'mdi-file-find-outline', text: 'Prediction', url: '/prediction' },
+      { icon: 'mdi-help-box', text: 'Help', url: '/help' },
+      { icon: 'mdi-download', text: 'Download', url: '/download' },
+      { icon: 'mdi-information', text: 'About us', url: '/about' }
+    ]
+  })
+}
+</script>
+
+<style>
+#keep .v-navigation-drawer__border {
+  display: none;
+}
+</style>
