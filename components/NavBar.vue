@@ -1,9 +1,9 @@
 <template>
   <div class="nav">
     <nuxt-link to="/" class="brand">
-      Real World Events
+      DESSO database
     </nuxt-link>
-    <nav>
+    <!--<nav>
       <nuxt-link to="/">
         List
       </nuxt-link>
@@ -11,7 +11,7 @@
       <nuxt-link to="/event/create">
         Create
       </nuxt-link>
-    </nav>
+    </nav>-->
   </div>
 </template>
 
