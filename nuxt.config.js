@@ -35,15 +35,22 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/vuetify'
   ],
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-webfontloader'
   ],
+  webfontloader: {
+    google: {
+      families: ['Lato:400,700'] // Loads Lato font with weights 400 and 700
+    }
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

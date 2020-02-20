@@ -1,10 +1,12 @@
-# real-world-nuxt
+# DESSO database
 
-> My cat&#39;s pajamas Nuxt.js project
+## Description
+
+DEESO is a method for cis-regulatory motif prediction using deep neural networks and the binomial distribution model. The DESSO database provides computed details of human transcription factor binding sites information, as well as uploads ChIP-seq dataset to predict cis-regulatory motifs using pre-trained models. The DESSO database records 690 human ENCODE ChIP-seq datasets, 185 transcription factors datasets related to 20 cancer types, and 3 Single-cell ChIP-seq datasets.
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install
 
