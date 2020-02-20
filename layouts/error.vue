@@ -38,7 +38,8 @@ export default {
     },
     message() {
       // <--- Print the error
-      return this.error.message
+      return 'Google. The spectacle before us was indeed sublime. Lorem ipsum dolor sit amet, cu semper pertinax duo, at mea iuvaret noluisse tincidunt, an tollit sensibus petentium vel. Has error molestie verterem in. Paulo pericula sententiae est ex. Id brute iisque philosophia has, exerci aperiri consequat nam te. Accumsan quaestio cum ei. Per doming aeterno menandri et, primis aliquam id his, te est saepe periculis assentior'
+      // return this.error.message
     }
   },
   head() {

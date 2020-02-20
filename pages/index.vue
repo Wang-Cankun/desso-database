@@ -3,11 +3,11 @@
     <v-app-bar app clipped-left color="blue">
       <v-app-bar-nav-icon @click="drawer = !drawer" />
       <span class="title ml-3 mr-5">DESSO database</span>
-      <v-icon>fas fa-search</v-icon>
+
       <v-text-field
         flat
         solo-inverted
-        label="Search"
+        placeholder="Search"
         class="hidden-sm-and-down"
         prepend-inner-icon="mdi-magnify"
       ></v-text-field>
@@ -33,7 +33,7 @@
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title class="grey--text">
+              <v-list-item-title class="black--text">
                 {{ item.text }}
               </v-list-item-title>
             </v-list-item-content>
@@ -63,11 +63,29 @@ export default {
       { icon: 'mdi-download', text: 'Download', url: '/download' },
       { icon: 'mdi-information', text: 'About us', url: '/about' }
     ]
-  })
+  }),
+
+  head() {
+    return {
+      title: 'Home'
+    }
+  }
 }
 </script>
 
 <style>
+#keep main .container {
+  height: 660px;
+}
+
+.navigation-drawer__border {
+  display: none;
+}
+
+.text {
+  font-weight: 400;
+}
+
 #keep .v-navigation-drawer__border {
   display: none;
 }

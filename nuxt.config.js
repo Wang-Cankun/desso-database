@@ -43,12 +43,14 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    'nuxt-webfontloader'
+    '@nuxtjs/axios'
   ],
-  webfontloader: {
-    google: {
-      families: ['Lato:400,700'] // Loads Lato font with weights 400 and 700
+  vuetify: {
+    font: {
+      family: 'Roboto'
+    },
+    icons: {
+      iconfont: 'mdi' // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
     }
   },
   /*
