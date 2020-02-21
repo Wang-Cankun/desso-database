@@ -4,6 +4,7 @@
       :search-client="searchClient"
       index-name="demo_ecommerce"
     >
+      <ais-search-box />
       <ais-configure
         :hits-per-page="5"
         :restrict-searchable-attributes="['name']"
@@ -21,9 +22,9 @@
           >
             <template slot-scope="{ suggestion }">
               <ais-highlight
-                v-if="suggestion.item.name"
+                v-if="suggestion.item.brand"
                 :hit="suggestion.item"
-                attribute="name"
+                attribute="brand"
               />
               <strong>$ {{ suggestion.item.price }}</strong>
               <img :src="suggestion.item.image" />
@@ -39,7 +40,10 @@
 import algoliasearch from 'algoliasearch/lite'
 import {
   AisInstantSearchSsr,
+  AisSearchBox,
   AisAutocomplete,
+  AisHighlight,
+  AisConfigure,
   createInstantSearch
 } from 'vue-instantsearch'
 import { VueAutosuggest } from 'vue-autosuggest'
@@ -61,8 +65,11 @@ const { instantsearch, rootMixin } = createInstantSearch({
 })
 export default {
   components: {
+    AisSearchBox,
     VueAutosuggest,
     AisAutocomplete,
+    AisConfigure,
+    AisHighlight,
     AisInstantSearchSsr
   },
   mixins: [rootMixin],
@@ -71,21 +78,12 @@ export default {
       .findResultsState({
         // find out which parameters to use here using ais-state-results
         query: 'iphone',
-        hitsPerPage: 3,
+        hitsPerPage: 10,
         disjunctiveFacets: ['brand']
       })
       .then(() => ({
         instantSearchState: instantsearch.getState()
       }))
-  },
-  data() {
-    return {
-      searchClient: algoliasearch(
-        '17HRN2A0ND',
-        'cdeb268994f7da3f6f530b6072caed2d'
-      ),
-      query: ''
-    }
   },
   beforeMount() {
     instantsearch.hydrate(this.instantSearchState)

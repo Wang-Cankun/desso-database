@@ -73,6 +73,8 @@ export default {
     /*
      ** You can extend webpack config here
      */
+
+    transpile: ['vue-instantsearch', 'instantsearch.js/es'],
     extend(config, ctx) {}
   },
   generate: {

@@ -13,7 +13,10 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
-    "nuxt": "^2.0.0"
+    "algoliasearch": "^4.0.3",
+    "nuxt": "^2.0.0",
+    "vue-autosuggest": "^2.0.4",
+    "vue-instantsearch": "^2.7.0"
   },
   "devDependencies": {
     "@mdi/font": "^4.9.95",
