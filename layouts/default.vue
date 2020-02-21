@@ -1,8 +1,8 @@
 <template>
   <v-app id="keep">
-    <v-app-bar app clipped-left :color="color">
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+    <v-app-bar app clipped-left :color="appBarColor" dark>
+      <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
+      <v-toolbar-title style="width: 300px" class="ml-2 pl-4">
         <span class="hidden-sm-and-down">{{ title }}</span>
       </v-toolbar-title>
       <v-text-field
@@ -28,7 +28,7 @@
               <v-btn small text>edit</v-btn>
             </v-col>
           </v-row>
-          <v-divider v-else-if="item.divider" :key="i" dark class="my-4" />
+          <v-divider v-else-if="item.divider" :key="i" dark />
           <v-list-item v-else :key="i" link :to="item.url">
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -48,8 +48,12 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; BMBL | {{ new Date().getFullYear() }} </span>
+    <v-footer app>
+      <span>
+        DESSO is developed by BMBL and it is licensed under
+        <v-icon>mdi-creative-commons</v-icon> Creative Commons Attribution 4.0
+        International License. | {{ new Date().getFullYear() }}
+      </span>
     </v-footer>
   </v-app>
 </template>
@@ -58,7 +62,8 @@ export default {
   data: () => ({
     drawer: null,
     title: 'DESSO database',
-    color: 'blue',
+    appBarColor: 'primary',
+    appBarTextColor: '#ccccd6', // 远山紫
     items: [
       { icon: 'mdi-home', text: 'Home', url: '/' },
       { icon: 'mdi-table', text: 'Browse', url: '/browse' },

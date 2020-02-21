@@ -1,6 +1,6 @@
 <template>
   <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
+    <v-flex xs12 sm8 md6 lg12>
       <v-card>
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template

@@ -1,4 +1,3 @@
-import colors from 'vuetify/es5/util/colors'
 import EventService from './services/EventService.js'
 
 export default {
@@ -47,18 +46,17 @@ export default {
     '@nuxtjs/axios'
   ],
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: false,
+      light: true,
       themes: {
         light: {
-          primary: '#1976D2',
-          secondary: '#424242',
-          accent: '#82B1FF',
-          error: '#FF5252',
-          info: '#2196F3',
-          success: '#4CAF50',
-          warning: '#FFC107'
+          primary: '#1781b5', // 釉蓝
+          secondary: '#310f1b', // 墨紫
+          accent: '#5698c3', // 晴蓝
+          error: '#ec2b24', // 秋海棠红
+          info: '#2775b6', // 景泰蓝
+          success: '#68b88e', // 田园绿
+          warning: '#fecc11' // 向日葵黄
         }
       }
     }
