@@ -5,13 +5,7 @@
       <v-toolbar-title style="width: 300px" class="ml-2 pl-4">
         <span class="hidden-sm-and-down">{{ title }}</span>
       </v-toolbar-title>
-      <v-text-field
-        solo-inverted
-        flat
-        hide-details
-        label="Search"
-        prepend-inner-icon="mdi-magnify"
-      />
+      <search-box></search-box>
       <v-spacer />
     </v-app-bar>
 
@@ -58,7 +52,11 @@
   </v-app>
 </template>
 <script>
+import SearchBox from '@/components/SearchBox'
 export default {
+  components: {
+    'search-box': SearchBox
+  },
   data: () => ({
     drawer: null,
     title: 'DESSO database',
