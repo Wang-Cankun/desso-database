@@ -3,7 +3,9 @@
     <v-app-bar app clipped-left :color="appBarColor" dark>
       <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
       <v-toolbar-title style="width: 300px" class="ml-2 pl-4">
-        <span class="hidden-sm-and-down">{{ title }}</span>
+        <nuxt-link to="/">
+          <span class="app-bar-title hidden-sm-and-down">{{ title }}</span>
+        </nuxt-link>
       </v-toolbar-title>
       <search-box></search-box>
       <v-spacer />
@@ -38,7 +40,7 @@
     </v-navigation-drawer>
 
     <v-content>
-      <v-container>
+      <v-container class="px-6">
         <nuxt />
       </v-container>
     </v-content>
@@ -86,7 +88,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.app-bar-title {
+  color: white;
+}
 #keep .v-navigation-drawer__border {
   display: none;
 }

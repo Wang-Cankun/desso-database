@@ -29,7 +29,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '@/plugins/particles.js', ssr: false }],
   /*
    ** Nuxt.js dev-modules
    */
@@ -47,11 +47,19 @@ export default {
   ],
   vuetify: {
     theme: {
+      options: {
+        customProperties: true
+      },
       light: true,
+      // Traditional chinese color 传统中国色
+      // http://zhongguose.com/
+      // Traditional nippon colors 传统日本色
+      // https://nipponcolors.com/
       themes: {
         light: {
           primary: '#1781b5', // 釉蓝
-          secondary: '#310f1b', // 墨紫
+          secondary: '#F17C67', // 珊瑚朱
+          tertiary: '#CA7853', // 远州茶
           accent: '#5698c3', // 晴蓝
           error: '#ec2b24', // 秋海棠红
           info: '#2775b6', // 景泰蓝
@@ -74,7 +82,7 @@ export default {
      ** You can extend webpack config here
      */
 
-    transpile: ['vue-instantsearch', 'instantsearch.js/es'],
+    transpile: ['vue-instantsearch'],
     extend(config, ctx) {}
   },
   generate: {

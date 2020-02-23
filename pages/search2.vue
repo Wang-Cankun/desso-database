@@ -1,102 +1,83 @@
 <template>
-  <div>
-    <ais-instant-search-ssr
-      :search-client="searchClient"
-      index-name="demo_ecommerce"
-    >
-      <ais-search-box />
-      <ais-configure
-        :hits-per-page="5"
-        :restrict-searchable-attributes="['name']"
-      />
-      <ais-autocomplete>
-        <template slot-scope="{ currentRefinement, indices, refine }">
-          <vue-autosuggest
-            :suggestions="indicesToSuggestions(indices)"
-            :input-props="{
-              style: 'width: 100%',
-              onInputChange: refine,
-              placeholder: 'Search here…'
-            }"
-            @selected="onSelect"
-          >
-            <template slot-scope="{ suggestion }">
-              <ais-highlight
-                v-if="suggestion.item.brand"
-                :hit="suggestion.item"
-                attribute="brand"
-              />
-              <strong>$ {{ suggestion.item.price }}</strong>
-              <img :src="suggestion.item.image" />
-            </template>
-          </vue-autosuggest>
-        </template>
-      </ais-autocomplete>
-    </ais-instant-search-ssr>
-  </div>
+  <v-layout column justify-center align-center>
+    <v-flex xs12 sm8 md6 lg12>
+      <v-card>
+        <v-card-title class="headline">
+          Welcome to the Vuetify + Nuxt.js template
+        </v-card-title>
+        <v-card-text>
+          <p>
+            Vuetify is a progressive Material Design component framework for
+            Vue.js. It was designed to empower developers to create amazing
+            applications.
+          </p>
+          <p>
+            For more information on Vuetify, check out the
+            <a href="https://vuetifyjs.com" target="_blank"> documentation </a>.
+          </p>
+          <p>
+            If you have questions, please join the official
+            <a href="https://chat.vuetifyjs.com/" target="_blank" title="chat">
+              discord </a
+            >.
+          </p>
+          <p>
+            Find a bug? Report it on the github
+            <a
+              href="https://github.com/vuetifyjs/vuetify/issues"
+              target="_blank"
+              title="contribute"
+            >
+              issue board </a
+            >.
+          </p>
+          <p>
+            Thank you for developing with Vuetify and I look forward to bringing
+            more exciting features in the future.
+          </p>
+          <div class="text-xs-right">
+            <em><small>&mdash; John Leider</small></em>
+          </div>
+          <hr class="my-3" />
+          <a href="https://nuxtjs.org/" target="_blank">
+            Nuxt Documentation
+          </a>
+          <br />
+          <a href="https://github.com/nuxt/nuxt.js" target="_blank">
+            Nuxt GitHub
+          </a>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn color="primary" nuxt to="/search">
+            Continue
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-import algoliasearch from 'algoliasearch/lite'
-import {
-  AisInstantSearchSsr,
-  AisSearchBox,
-  AisAutocomplete,
-  AisHighlight,
-  AisConfigure,
-  createInstantSearch
-} from 'vue-instantsearch'
-import { VueAutosuggest } from 'vue-autosuggest'
-
-const searchClient = algoliasearch(
-  'latency',
-  '6be0576ff61c053d5f9a3225e2a90f76'
-)
-
-/*
-const searchClient = algoliasearch(
-  '17HRN2A0ND',
-  'cdeb268994f7da3f6f530b6072caed2d'
-)
-*/
-const { instantsearch, rootMixin } = createInstantSearch({
-  searchClient,
-  indexName: 'instant_search'
-})
 export default {
-  components: {
-    AisSearchBox,
-    VueAutosuggest,
-    AisAutocomplete,
-    AisConfigure,
-    AisHighlight,
-    AisInstantSearchSsr
-  },
-  mixins: [rootMixin],
-  asyncData() {
-    return instantsearch
-      .findResultsState({
-        // find out which parameters to use here using ais-state-results
-        query: 'iphone',
-        hitsPerPage: 10,
-        disjunctiveFacets: ['brand']
-      })
-      .then(() => ({
-        instantSearchState: instantsearch.getState()
-      }))
-  },
-  beforeMount() {
-    instantsearch.hydrate(this.instantSearchState)
-  },
-  methods: {
-    onSelect(selected) {
-      if (selected) {
-        this.query = selected.item.name
-      }
-    },
-    indicesToSuggestions(indices) {
-      return indices.map(({ hits }) => ({ data: hits }))
+  head() {
+    return {
+      title: 'Home'
     }
   }
 }
 </script>
+
+<style>
+#keep main .container {
+  height: 660px;
+}
+
+.navigation-drawer__border {
+  display: none;
+}
+
+.text {
+  font-weight: 400;
+}
+</style>

@@ -1,33 +1,64 @@
 <template>
   <ais-instant-search-ssr>
-    <v-text-field
-      slot="activator"
-      solo-inverted
-      flat
-      hide-details
-      label="Search"
-      prepend-inner-icon="mdi-magnify"
-    />
-    <ais-search-box />
+    <ais-search-box v-slot="{ currentRefinement, refine }">
+      <v-row align="baseline" justify="start">
+        <v-text-field
+          v-model="currentSearchText"
+          class="mt-2 mb-0"
+          type="search"
+          clearable
+          solo
+          hide-details
+          autofocus
+          label="Search"
+          height="70"
+          prepend-inner-icon="mdi-magnify"
+          @input="refine(currentSearchText)"
+        />
+      </v-row>
+      <v-row align="baseline" justify="start">
+        <p>Examples:</p>
+        <v-btn color="primary" text @click="searchByText(refine, 'apple')">
+          Apple
+        </v-btn>
+        <v-btn
+          color="primary"
+          text
+          @click="searchByText(refine, 'google chrome')"
+        >
+          google
+        </v-btn>
+        <v-btn color="primary" text @click="searchByText(refine, 'verizon')">
+          verizon
+        </v-btn>
+        <v-img
+          class="ml-auto"
+          max-width="120px"
+          src="https://www.algolia.com/gatsby-images/search/search-by-algolia.svg"
+        ></v-img>
+      </v-row>
 
-    <ais-hits>
-      <template slot="item" slot-scope="{ item }">
-        <v-card class="mx-auto" max-width="400" tile>
-          <v-subheader>Search:</v-subheader>
-          <v-list-item shaped three-line>
-            <v-list-item-content>
-              <v-list-item-title>
-                <ais-highlight attribute="brand" :hit="item" />
-              </v-list-item-title>
-              <v-list-item-subtitle
-                ><ais-highlight attribute="name" :hit="item"
-              /></v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
-      </template>
-    </ais-hits>
-    <ais-pagination />
+      <div class="mt-12 text-center">Value: {{ currentSearchText }}</div>
+      <div v-show="currentSearchText">
+        <ais-hits>
+          <template slot="item" slot-scope="{ item }">
+            <v-card class="mx-auto" max-width="400" tile>
+              <v-list-item shaped three-line>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    <p><ais-highlight attribute="brand" :hit="item" /></p>
+                  </v-list-item-title>
+                  <v-list-item-subtitle
+                    ><ais-highlight attribute="name" :hit="item"
+                  /></v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
+          </template>
+        </ais-hits>
+        <ais-pagination />
+      </div>
+    </ais-search-box>
   </ais-instant-search-ssr>
 </template>
 
@@ -61,17 +92,23 @@ export default {
     AisPagination
   },
   mixins: [rootMixin],
-  asyncData() {
+  // eslint-disable-next-line require-await
+  async asyncData() {
     return instantsearch
       .findResultsState({
         // find out which parameters to use here using ais-state-results
-        query: 'iphone',
-        hitsPerPage: 10,
+        query: null,
+        hitsPerPage: 5,
         disjunctiveFacets: ['brand']
       })
       .then(() => ({
         instantSearchState: instantsearch.getState()
       }))
+  },
+  data() {
+    return {
+      currentSearchText: null
+    }
   },
   computed: {
     processingTimeMS() {
@@ -80,6 +117,12 @@ export default {
   },
   beforeMount() {
     instantsearch.hydrate(this.instantSearchState)
+  },
+  methods: {
+    searchByText(refine, text) {
+      this.currentSearchText = text
+      refine(text)
+    }
   },
   head() {
     return {
@@ -96,3 +139,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.ais-Highlight-highlighted {
+  color: var(--v-primary-base);
+  background-color: white;
+}
+
+.v-text-field {
+  font-size: 1.6em;
+}
+</style>
