@@ -29,7 +29,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '@/plugins/particles.js', ssr: false }],
+  plugins: [],
   /*
    ** Nuxt.js dev-modules
    */
@@ -58,8 +58,8 @@ export default {
       themes: {
         light: {
           primary: '#1781b5', // 釉蓝
-          secondary: '#F17C67', // 珊瑚朱
-          tertiary: '#CA7853', // 远州茶
+          secondary: '#CA7853', // 远州茶
+          tertiary: '#F17C67', // 珊瑚朱
           accent: '#5698c3', // 晴蓝
           error: '#ec2b24', // 秋海棠红
           info: '#2775b6', // 景泰蓝
@@ -82,7 +82,7 @@ export default {
      ** You can extend webpack config here
      */
 
-    transpile: ['vue-instantsearch'],
+    transpile: ['vue-instantsearch', 'instantsearch.js/es'],
     extend(config, ctx) {}
   },
   generate: {

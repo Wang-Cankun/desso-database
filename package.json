@@ -1,7 +1,7 @@
 {
   "name": "desso-database",
   "version": "1.0.0",
-  "description": "DEESO is a method for cis-regulatory motif prediction using deep neural networks and the binomial distribution model. The DESSO database provides computed details of human transcription factor binding sites information, as well as uploads ChIP-seq dataset to predict cis-regulatory motifs using pre-trained models. The DESSO database records 690 human ENCODE ChIP-seq datasets, 185 transcription factors datasets related to 20 cancer types, and 3 Single-cell ChIP-seq datasets.",
+  "description": "DESSO is a database that provides all identified sequence and shape motifs from a homonymous framework. This framework contains a deep learning model for motif pattern learning and a novel statistical model for motif instance identification. The DESSO database records 690 human ENCODE ChIP-seq datasets, 185 transcription factors datasets related to 20 cancer types, and 3 Single-cell ChIP-seq datasets.",
   "author": "Cankun Wang",
   "private": true,
   "scripts": {
@@ -16,8 +16,7 @@
     "algoliasearch": "^4.0.3",
     "nuxt": "^2.0.0",
     "vue-autosuggest": "^2.0.4",
-    "vue-instantsearch": "^2.7.0",
-    "vue-particles": "^1.0.9"
+    "vue-instantsearch": "^2.7.0"
   },
   "devDependencies": {
     "@mdi/font": "^4.9.95",
