@@ -10,8 +10,13 @@
       <search-box></search-box>
       <v-spacer />
     </v-app-bar>
-
-    <v-navigation-drawer v-model="drawer" app clipped color="grey lighten-4">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      clipped
+      hide-overlay
+      color="grey lighten-4"
+    >
       <v-list dense class="grey lighten-4">
         <template v-for="(item, i) in items">
           <v-row v-if="item.heading" :key="i" align="center">
@@ -38,18 +43,20 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-
     <v-content>
       <v-container class="px-6">
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer app>
-      <span>
-        DESSO is developed by BMBL and it is licensed under
-        <v-icon>mdi-creative-commons</v-icon> Creative Commons Attribution 4.0
-        International License. | {{ new Date().getFullYear() }}
-      </span>
+    <v-footer app absolute class="font-weight-light">
+      <v-col class="text-center" cols="12">
+        DESSO is developed by <a href="https://u.osu.edu/bmbl/">BMBL</a> and it
+        is licensed under
+        <a href="https://creativecommons.org/licenses/by/4.0/"
+          ><v-icon>mdi-creative-commons</v-icon> Creative Commons Attribution
+          4.0 International License</a
+        >. | {{ new Date().getFullYear() }}
+      </v-col>
     </v-footer>
   </v-app>
 </template>
@@ -94,5 +101,8 @@ export default {
 }
 #keep .v-navigation-drawer__border {
   display: none;
+}
+.v-footer a {
+  text-decoration: none;
 }
 </style>
