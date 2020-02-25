@@ -48,7 +48,7 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer app absolute class="font-weight-light">
+    <v-footer absolute class="font-weight-light">
       <v-col class="text-center" cols="12">
         DESSO is developed by <a href="https://u.osu.edu/bmbl/">BMBL</a> and it
         is licensed under
