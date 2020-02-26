@@ -25,7 +25,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['github-markdown-css'],
+  css: ['github-markdown-css', '~/assets/main.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -49,12 +49,14 @@ export default {
   markdownit: {
     preset: 'default',
     linkify: true,
-    breaks: true,
+    breaks: false,
+    typographer: true,
     use: [
-      'markdown-it-div',
-      'markdown-it-attrs',
       'markdown-it-anchor',
-      'markdown-it-toc-done-right'
+      'markdown-it-attrs',
+      'markdown-it-div',
+      'markdown-it-toc-done-right',
+      'markdown-it-emoji'
     ]
   },
   vuetify: {
