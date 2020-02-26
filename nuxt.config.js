@@ -50,7 +50,12 @@ export default {
     preset: 'default',
     linkify: true,
     breaks: true,
-    use: ['markdown-it-div', 'markdown-it-attrs']
+    use: [
+      'markdown-it-div',
+      'markdown-it-attrs',
+      'markdown-it-anchor',
+      'markdown-it-toc-done-right'
+    ]
   },
   vuetify: {
     theme: {

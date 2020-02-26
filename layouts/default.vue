@@ -19,18 +19,7 @@
     >
       <v-list dense class="grey lighten-4">
         <template v-for="(item, i) in items">
-          <v-row v-if="item.heading" :key="i" align="center">
-            <v-col cols="6">
-              <v-subheader v-if="item.heading">
-                {{ item.heading }}
-              </v-subheader>
-            </v-col>
-            <v-col cols="6" class="text-right">
-              <v-btn small text>edit</v-btn>
-            </v-col>
-          </v-row>
-          <v-divider v-else-if="item.divider" :key="i" dark />
-          <v-list-item v-else :key="i" link :to="item.url">
+          <v-list-item v-if="!item.sublinks" :key="i" link :to="item.url">
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
@@ -40,6 +29,33 @@
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-group v-else :key="i" link :to="item.url">
+            <template v-slot:activator>
+              <v-list-item-action>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title class="black--text">
+                  {{ item.text }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </template>
+
+            <v-list-item
+              v-for="sublink in item.sublinks"
+              :key="sublink.text"
+              :to="sublink.url"
+            >
+              <v-list-item-action>
+                <v-icon>{{ sublink.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title class="black--text">
+                  {{ sublink.text }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -66,20 +82,42 @@ export default {
   components: {
     'search-box': SearchBox
   },
-  data: () => ({
-    drawer: null,
-    title: 'DESSO database',
-    appBarColor: 'primary',
-    appBarTextColor: '#ccccd6', // 远山紫
-    items: [
-      { icon: 'mdi-home', text: 'Home', url: '/' },
-      { icon: 'mdi-table', text: 'Browse', url: '/browse' },
-      { icon: 'mdi-file-find-outline', text: 'Prediction', url: '/prediction' },
-      { icon: 'mdi-help-box', text: 'Help', url: '/help' },
-      { icon: 'mdi-download', text: 'Download', url: '/download' },
-      { icon: 'mdi-information', text: 'About us', url: '/about' }
-    ]
-  }),
+  data() {
+    return {
+      drawer: null,
+      title: 'DESSO database',
+      appBarColor: 'primary',
+      appBarTextColor: '#ccccd6', // 远山紫
+      items: [
+        { icon: 'mdi-home', text: 'Home', url: '/' },
+        { icon: 'mdi-table', text: 'Browse', url: '/browse' },
+        {
+          icon: 'mdi-file-find-outline',
+          text: 'Prediction',
+          url: '/prediction'
+        },
+        {
+          icon: 'mdi-help-box',
+          text: 'Help',
+          to: '/help',
+          sublinks: [
+            {
+              icon: 'mdi-help-box',
+              text: 'tutorial1',
+              url: '/help/1'
+            },
+            {
+              icon: 'mdi-help-box',
+              text: 'tutorial2',
+              url: '/help/2'
+            }
+          ]
+        },
+        { icon: 'mdi-download', text: 'Download', url: '/download' },
+        { icon: 'mdi-information', text: 'About us', url: '/about' }
+      ]
+    }
+  },
   head() {
     return {
       titleTemplate: '%s - DESSO database',
