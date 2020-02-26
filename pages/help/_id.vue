@@ -4,14 +4,18 @@
   <v-responsive class="mx-auto overflow-visible" max-width="1024">
     <v-container class="markdown-body">
       <div v-html="post"></div>
+      <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
+      <v-card class="mx-auto overflow-hidden"> </v-card>
+      <v-navigation-drawer v-model="drawer" permanent floating clipped
+        ><div v-html="navContent"></div>
+      </v-navigation-drawer>
       <Fab></Fab>
-      {{ toc }}
     </v-container>
   </v-responsive>
 </template>
 
 <script>
-import Fab from '@/components/Fab'
+import Fab from '@/components/utils/Fab'
 
 export default {
   components: {
@@ -24,9 +28,9 @@ export default {
       const navEnd = post.default.lastIndexOf('nav>') + 4
       const navContent = post.default.substring(navStart, navEnd)
 
-      console.log(navContent)
       return {
-        post: post.default
+        post: post.default,
+        navContent
       }
     } catch (err) {
       error({ statusCode: 404, message: 'Page not found' })
@@ -34,6 +38,7 @@ export default {
   },
   data() {
     return {
+      drawer: null,
       post: null
     }
   },
@@ -59,8 +64,6 @@ export default {
   content: none;
 }
 .table-of-contents {
-  background: #f9f9f9 none repeat scroll 0 0;
-  border: 1px solid #aaa;
   display: table;
   font-size: 95%;
   margin-bottom: 1em;

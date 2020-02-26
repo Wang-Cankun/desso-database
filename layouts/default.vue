@@ -90,7 +90,7 @@
   </v-app>
 </template>
 <script>
-import SearchBox from '@/components/SearchBox'
+import SearchBox from '@/components/utils/SearchBox'
 export default {
   components: {
     'search-box': SearchBox
@@ -156,7 +156,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .app-bar-title {
   color: white;
 }
