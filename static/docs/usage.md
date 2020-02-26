@@ -1,15 +1,15 @@
 ---
-__Advertisement :)__
-
-- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
-resize in browser.
-- __[babelfish](https://github.com/nodeca/babelfish/)__ - developer friendly
-i18n with plurals support and easy syntax.
-
-You will like those projects!
+[[toc]]
 ---
 
-[[toc]]
+**Advertisement :)**
+
+- **[pica](https://nodeca.github.io/pica/demo/)** - high quality and fast image
+  resize in browser.
+- **[babelfish](https://github.com/nodeca/babelfish/)** - developer friendly
+  i18n with plurals support and easy syntax.
+
+## You will like those projects!
 
 # h1 Heading 8-)
 
@@ -24,8 +24,6 @@ You will like those projects!
 ###### h6 Heading
 
 ## Horizontal Rules
-
----
 
 ---
 
