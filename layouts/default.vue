@@ -15,45 +15,51 @@
       app
       clipped
       hide-overlay
-      color="grey lighten-4"
+      class="grey lighten-4"
+      width="320"
     >
-      <v-list dense class="grey lighten-4">
+      <v-list class="grey lighten-4" shaped>
         <template v-for="(item, i) in items">
-          <v-list-item v-if="!item.sublinks" :key="i" link :to="item.url">
+          <v-list-item
+            v-if="!item.sublinks"
+            :key="i"
+            :to="item.url"
+            active-class="blue lighten-4"
+          >
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
-            <v-list-item-content>
+            <v-list-item-title class="black--text">
+              {{ item.text }}
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-group
+            v-else
+            :key="i"
+            :to="item.url"
+            active-class="blue lighten-5"
+          >
+            <template v-slot:activator>
+              <v-list-item-action active-class="blue lighten-4">
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-action>
               <v-list-item-title class="black--text">
                 {{ item.text }}
               </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-group v-else :key="i" link :to="item.url">
-            <template v-slot:activator>
-              <v-list-item-action>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title class="black--text">
-                  {{ item.text }}
-                </v-list-item-title>
-              </v-list-item-content>
             </template>
-
             <v-list-item
               v-for="sublink in item.sublinks"
               :key="sublink.text"
+              class="px-8"
               :to="sublink.url"
+              active-class="blue lighten-4"
             >
               <v-list-item-action>
                 <v-icon>{{ sublink.icon }}</v-icon>
               </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title class="black--text">
-                  {{ sublink.text }}
-                </v-list-item-title>
-              </v-list-item-content>
+              <v-list-item-title class="black--text">
+                {{ sublink.text }}
+              </v-list-item-title>
             </v-list-item>
           </v-list-group>
         </template>
@@ -64,7 +70,14 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer absolute class="font-weight-light">
+    <v-footer
+      app
+      inset
+      absolute
+      class="font-weight-light"
+      heigth="200"
+      width="auto"
+    >
       <v-col class="text-center" cols="12">
         DESSO is developed by <a href="https://u.osu.edu/bmbl/">BMBL</a> and it
         is licensed under
@@ -102,18 +115,28 @@ export default {
           to: '/help',
           sublinks: [
             {
-              icon: 'mdi-help-box',
-              text: 'tutorial1',
-              url: '/help/1'
+              icon: 'mdi-account-question',
+              text: 'Usage',
+              url: '/help/usage'
             },
             {
-              icon: 'mdi-help-box',
-              text: 'tutorial2',
-              url: '/help/2'
+              icon: 'mdi-book-open-page-variant',
+              text: 'Background information',
+              url: '/help/background'
+            },
+            {
+              icon: 'mdi-frequently-asked-questions',
+              text: 'Frequently asked questions',
+              url: '/help/faq'
+            },
+            {
+              icon: 'mdi-api',
+              text: 'API documentation',
+              url: '/help/api'
             }
           ]
         },
-        { icon: 'mdi-download', text: 'Download', url: '/download' },
+        { icon: 'mdi-download', text: 'Downloads', url: '/downloads' },
         { icon: 'mdi-information', text: 'About us', url: '/about' }
       ]
     }
