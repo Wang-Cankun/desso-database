@@ -40,17 +40,6 @@
           </li>
         </template>
       </ul>
-
-      <div class="pl-6">
-        <v-fade-transition appear>
-          <supporters-supporter-group
-            :group="supporters['Diamond']"
-            small
-            justify="start"
-            title="Diamond Sponsors"
-          />
-        </v-fade-transition>
-      </div>
     </template>
   </v-navigation-drawer>
 </template>

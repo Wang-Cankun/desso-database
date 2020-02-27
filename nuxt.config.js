@@ -29,7 +29,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['@/plugins/plugin.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -49,8 +49,9 @@ export default {
   markdownit: {
     preset: 'default',
     linkify: true,
-    breaks: false,
+    breaks: true,
     typographer: true,
+    html: false,
     use: [
       'markdown-it-anchor',
       'markdown-it-attrs',
@@ -59,6 +60,18 @@ export default {
       'markdown-it-emoji'
     ]
   },
+  'markdown-it-anchor': {
+    opts: {
+      level: 1,
+      // slugify: string => string,
+      permalink: true,
+      // renderPermalink: (slug, opts, state, permalink) => {},
+      permalinkClass: 'header-anchor',
+      permalinkSymbol: '¶',
+      permalinkBefore: true
+    }
+  },
+
   vuetify: {
     theme: {
       options: {
