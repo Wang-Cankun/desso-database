@@ -6,27 +6,19 @@
       <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
       <v-card class="mx-auto overflow-hidden"> </v-card>
       <div v-html="post"></div>
-
-      <v-navigation-drawer
-        v-model="drawer"
-        class="grey lighten-4"
-        app
-        right
-        clipped
-        fixed
-        ><div v-html="navContent"></div>
-        <Fab></Fab>
-      </v-navigation-drawer>
+      <toc :content="navContent"></toc>
+      <Fab></Fab>
     </v-container>
   </v-responsive>
 </template>
 
 <script>
 import Fab from '@/components/utils/Fab'
-
+import toc from '@/components/utils/toc'
 export default {
   components: {
-    Fab
+    Fab,
+    toc
   },
   async asyncData({ store, error, params }) {
     try {
@@ -87,5 +79,22 @@ export default {
   padding: 32px 0 0;
   margin: 0;
   width: 100%;
+}
+.header-anchor {
+  position: absolute;
+  left: -0.5em;
+  opacity: 0;
+
+  \-webkit-transition: opacity 0.2s ease-in-out 0.1s;
+  \-moz-transition: opacity 0.2s ease-in-out 0.1s;
+  \-ms-transition: opacity 0.2s ease-in-out 0.1s;
+}
+h1:hover .header-anchor,
+h2:hover .header-anchor,
+h3:hover .header-anchor,
+h4:hover .header-anchor,
+h5:hover .header-anchor,
+h6:hover .header-anchor {
+  opacity: 1;
 }
 </style>

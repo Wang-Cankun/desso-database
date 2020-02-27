@@ -158,7 +158,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .app-bar-title {
   color: white;
 }
