@@ -1,6 +1,6 @@
 <template>
   <v-app id="keep">
-    <v-app-bar app clipped-left :color="appBarColor" dark>
+    <v-app-bar app clipped-left clipped-right :color="appBarColor" dark>
       <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
       <v-toolbar-title style="width: 300px" class="ml-2 pl-4">
         <nuxt-link to="/">
@@ -16,7 +16,7 @@
       clipped
       hide-overlay
       class="grey lighten-4"
-      width="320"
+      width="325"
     >
       <v-list class="grey lighten-4" shaped>
         <template v-for="(item, i) in items">
@@ -65,11 +65,13 @@
         </template>
       </v-list>
     </v-navigation-drawer>
+
     <v-content>
       <v-container class="px-6">
         <nuxt />
       </v-container>
     </v-content>
+
     <v-footer
       app
       inset

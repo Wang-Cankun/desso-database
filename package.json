@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/markdownit": "^1.2.7",
+    "@nuxtjs/markdownit": "^1.2.9",
     "algoliasearch": "^4.0.3",
     "github-markdown-css": "^4.0.0",
     "lodash.kebabcase": "^4.1.1",
@@ -25,14 +25,14 @@
     "nuxt": "^2.11.0",
     "vue-autosuggest": "^2.0.4",
     "vue-instantsearch": "^2.7.0",
-    "vue-markdown": "^2.2.4"
+    "vuex-pathify": "^1.4.1"
   },
   "devDependencies": {
     "@mdi/font": "^4.9.95",
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/vuetify": "^1.11.0",
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "^10.1.0",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-nuxt": ">=0.4.2",

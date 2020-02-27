@@ -73,11 +73,11 @@
                         </v-card-text>
                         <v-card-actions>
                           <v-btn color="secondary" text>
-                            Open this card
+                            Open
                           </v-btn>
 
                           <v-btn color="secondary" text>
-                            Explore similar card
+                            Explore
                           </v-btn>
                         </v-card-actions>
                       </v-card>

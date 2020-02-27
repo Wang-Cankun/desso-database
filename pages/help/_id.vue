@@ -3,13 +3,20 @@
 <template>
   <v-responsive class="mx-auto overflow-visible" max-width="1024">
     <v-container class="markdown-body">
-      <div v-html="post"></div>
       <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
       <v-card class="mx-auto overflow-hidden"> </v-card>
-      <v-navigation-drawer v-model="drawer" permanent floating clipped
+      <div v-html="post"></div>
+
+      <v-navigation-drawer
+        v-model="drawer"
+        class="grey lighten-4"
+        app
+        right
+        clipped
+        fixed
         ><div v-html="navContent"></div>
+        <Fab></Fab>
       </v-navigation-drawer>
-      <Fab></Fab>
     </v-container>
   </v-responsive>
 </template>
@@ -21,35 +28,45 @@ export default {
   components: {
     Fab
   },
-  async asyncData({ params, error }) {
+  async asyncData({ store, error, params }) {
     try {
       const post = await import(`@/static/docs/${params.id}.md`)
       const navStart = post.default.lastIndexOf('<nav')
       const navEnd = post.default.lastIndexOf('nav>') + 4
       const navContent = post.default.substring(navStart, navEnd)
-
+      // await store.dispatch('docs/commitToc', navContent)
       return {
-        post: post.default,
+        post: post.default.slice(navEnd),
         navContent
       }
     } catch (err) {
-      error({ statusCode: 404, message: 'Page not found' })
+      error({
+        statusCode: 404,
+        message: 'This page could not be found'
+      })
     }
   },
   data() {
     return {
       drawer: null,
-      post: null
-    }
-  },
-  computed: {
-    toc() {
-      return 1
+      post: null,
+      navContent: null
     }
   },
   methods: {
     toLink(pos) {
       this.$vuetify.goTo(0)
+    }
+  },
+  head() {
+    return {
+      title: 'title',
+      meta: [
+        {
+          name: 'name',
+          content: 'content'
+        }
+      ]
     }
   }
 }
