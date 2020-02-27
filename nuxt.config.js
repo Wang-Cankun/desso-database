@@ -53,23 +53,23 @@ export default {
     typographer: true,
     html: false,
     use: [
-      'markdown-it-anchor',
+      [
+        'markdown-it-anchor',
+        {
+          level: 1,
+          // slugify: string => string,
+          permalink: true,
+          // renderPermalink: (slug, opts, state, permalink) => {},
+          permalinkClass: 'header-anchor',
+          permalinkSymbol: '#',
+          permalinkBefore: false
+        }
+      ],
       'markdown-it-attrs',
       'markdown-it-div',
       'markdown-it-toc-done-right',
       'markdown-it-emoji'
     ]
-  },
-  'markdown-it-anchor': {
-    opts: {
-      level: 1,
-      // slugify: string => string,
-      permalink: true,
-      // renderPermalink: (slug, opts, state, permalink) => {},
-      permalinkClass: 'header-anchor',
-      permalinkSymbol: '¶',
-      permalinkBefore: true
-    }
   },
 
   vuetify: {
