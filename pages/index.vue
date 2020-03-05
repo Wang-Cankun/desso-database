@@ -41,11 +41,11 @@
           <v-btn color="primary" text @click="searchByText(refine, 'verizon')">
             verizon
           </v-btn>
-          <v-img
+          <!--<v-img
             class="ml-auto"
             max-width="120px"
             src="https://www.algolia.com/gatsby-images/search/search-by-algolia.svg"
-          ></v-img>
+          ></v-img>-->
         </v-row>
       </ais-search-box>
 
@@ -64,23 +64,31 @@
                       md6
                       lg3
                     >
-                      <v-card class="mx-auto pa-2" max-width="400" tile>
-                        <v-card-title primary-title>
-                          <ais-highlight attribute="brand" :hit="items[i]" />
-                        </v-card-title>
-                        <v-card-text>
-                          <ais-highlight attribute="name" :hit="items[i]" />
-                        </v-card-text>
-                        <v-card-actions>
-                          <v-btn color="secondary" text>
-                            Open
-                          </v-btn>
+                      <v-hover v-slot:default="{ hover }" open-delay="0">
+                        <v-card
+                          class="mx-auto pa-2"
+                          max-width="400"
+                          tile
+                          :elevation="hover ? 16 : 2"
+                          :class="{ 'on-hover': hover }"
+                        >
+                          <v-card-title primary-title>
+                            <ais-highlight attribute="brand" :hit="items[i]" />
+                          </v-card-title>
+                          <v-card-text>
+                            <ais-highlight attribute="name" :hit="items[i]" />
+                          </v-card-text>
+                          <v-card-actions>
+                            <v-btn color="secondary" text>
+                              Open
+                            </v-btn>
 
-                          <v-btn color="secondary" text>
-                            Explore
-                          </v-btn>
-                        </v-card-actions>
-                      </v-card>
+                            <v-btn color="secondary" text>
+                              Explore
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-hover>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -103,28 +111,17 @@
         </ais-pagination>
       </div>
     </ais-instant-search-ssr>
-
-    <v-layout column justify-center align-center>
-      <v-flex xs12 sm8 md6 lg12>
-        <p class="title">
-          Contents
-        </p>
-      </v-flex>
-      <v-carousel
-        cycle
-        height="400"
-        hide-delimiter-background
-        show-arrows-on-hover
-      >
-        <v-carousel-item v-for="(slide, i) in slides" :key="i">
-          <v-sheet :color="colors[i]" height="100%">
-            <v-row class="fill-height" align="center" justify="center">
-              <div class="display-3">{{ slide }} Slide</div>
-            </v-row>
-          </v-sheet>
-        </v-carousel-item>
-      </v-carousel>
-    </v-layout>
+    <v-row align="baseline" justify="start">
+      <dependency-wheel
+        class="d-flex flex-row mb-6"
+        :content="cancerTypeAndTfs"
+      ></dependency-wheel>
+      <dependency-wheel
+        class="d-flex flex-row mb-6"
+        :content="cancerTypeAndTfs"
+      ></dependency-wheel>
+    </v-row>
+    <carousel></carousel>
   </div>
 </template>
 
@@ -139,6 +136,9 @@ import {
   createInstantSearch
 } from 'vue-instantsearch'
 import algoliasearch from 'algoliasearch/lite'
+import carousel from '@/components/utils/Carousel'
+import dependencywheel from '@/components/utils/DependencyWheel.vue'
+import { cancerTypeAndTfs } from '~/static/highchartsData.js'
 
 const searchClient = algoliasearch(
   'latency',
@@ -157,7 +157,9 @@ export default {
     AisHighlight,
     AisSearchBox,
     AisStats,
-    AisPagination
+    AisPagination,
+    carousel,
+    'dependency-wheel': dependencywheel
   },
   mixins: [rootMixin],
   // eslint-disable-next-line require-await
@@ -184,7 +186,8 @@ export default {
         'red lighten-1',
         'deep-purple accent-4'
       ],
-      slides: ['First', 'Second', 'Third', 'Fourth', 'Fifth']
+      slides: ['First', 'Second', 'Third', 'Fourth', 'Fifth'],
+      cancerTypeAndTfs: cancerTypeAndTfs.data
     }
   },
   computed: {
