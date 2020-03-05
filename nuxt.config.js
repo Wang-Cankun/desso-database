@@ -25,11 +25,14 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['github-markdown-css', '~/assets/main.css'],
+  css: ['github-markdown-css', '~/assets/css/main.css'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/plugin.js'],
+  plugins: [
+    '@/plugins/plugin.js',
+    { src: '@/plugins/highcharts.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
