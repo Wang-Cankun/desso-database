@@ -4,7 +4,8 @@
       <v-flex xs12 sm8 md6 lg12>
         <p class="display-2">DESSO</p>
         <p class="title">
-          DNA sequence and shape motifs database from deep learning framework
+          DNA sequence motifs and shape motifs database from deep learning
+          framework
         </p>
       </v-flex>
     </v-layout>
