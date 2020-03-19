@@ -10,7 +10,7 @@
         </p>
 
         <v-btn nuxt to="/" color="primary" outlined>
-          Get me out of here!
+          Return to home
         </v-btn>
         <lost-image />
       </v-col>

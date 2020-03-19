@@ -74,7 +74,6 @@ export default {
       'markdown-it-emoji'
     ]
   },
-
   vuetify: {
     theme: {
       options: {
