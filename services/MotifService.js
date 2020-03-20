@@ -15,5 +15,8 @@ export default {
   },
   getMotif(id) {
     return apiClient.get('/matrix/' + id)
+  },
+  getTfbs(id) {
+    return apiClient.get('/tfbs/' + id)
   }
 }

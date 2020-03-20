@@ -3,7 +3,7 @@
     <div class="motif-header">
       <v-card>
         <v-card-title>
-          Broswse all data:
+          Broswse all motifs:
           <v-spacer></v-spacer>
           <v-text-field
             v-model="search"
@@ -63,7 +63,7 @@ export default {
   }),
   methods: {
     handleClick(motif) {
-      this.$router.push('/browse/' + motif.base_id)
+      this.$router.push('/browse/' + motif.data_id)
     }
   },
   head() {

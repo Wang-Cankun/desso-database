@@ -1,7 +1,8 @@
 import MotifService from '@/services/MotifService.js'
 export const state = () => ({
   motifs: [],
-  motif: {}
+  motif: [],
+  tfbs: []
 })
 export const mutations = {
   SET_MOTIFS(state, motifs) {
@@ -9,6 +10,9 @@ export const mutations = {
   },
   SET_MOTIF(state, motif) {
     state.motif = motif
+  },
+  SET_TFBS(state, tfbs) {
+    state.tfbs = tfbs
   }
 }
 export const actions = {
@@ -20,6 +24,11 @@ export const actions = {
   fetchMotif({ commit }, id) {
     return MotifService.getMotif(id).then(function(response) {
       commit('SET_MOTIF', response.data)
+    })
+  },
+  fetchTfbs({ commit }, id) {
+    return MotifService.getTfbs(id).then(function(response) {
+      commit('SET_TFBS', response.data)
     })
   }
 }
