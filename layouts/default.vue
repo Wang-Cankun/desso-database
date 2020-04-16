@@ -80,7 +80,7 @@
       heigth="200"
       width="auto"
     >
-      <v-col class="text-center" cols="12">
+      <v-col class="text-center caption" cols="12">
         DESSO is developed by <a href="https://u.osu.edu/bmbl/">BMBL</a> and it
         is licensed under
         <a href="https://creativecommons.org/licenses/by/4.0/"
