@@ -11,12 +11,12 @@ const apiClient = axios.create({
 
 export default {
   getMotifs() {
-    return apiClient.get('/matrix')
+    return apiClient.get('/info')
   },
   getMotif(id) {
-    return apiClient.get('/matrix/' + id)
+    return apiClient.get('/info/' + id)
   },
   getTfbs(id) {
-    return apiClient.get('/tfbs/' + id)
+    return apiClient.get('/sites/' + id)
   }
 }
