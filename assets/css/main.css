@@ -1,8 +1,11 @@
-.page-enter-active,
+/*.page-enter-active,
 .page-leave-active {
-  transition: opacity 0.25s ease;
+  transition-property: opacity;
+  transition-timing-function: ease-out;
+  transition-duration: 150ms;
 }
 .page-enter,
 .page-leave-to {
   opacity: 0;
 }
+*/
