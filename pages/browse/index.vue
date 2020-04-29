@@ -35,7 +35,7 @@ export default {
     } catch (e) {
       error({
         statusCode: 503,
-        message: 'ERROR CODE 503, using async await single motif'
+        message: 'ERROR CODE 503, using async await for single motif'
       })
     }
   },

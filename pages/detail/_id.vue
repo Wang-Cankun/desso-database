@@ -4,7 +4,7 @@
       <v-flex>
         <v-container fluid grid-list-md>
           <v-layout row wrap>
-            <v-flex xs12 md8 lg8>
+            <v-flex xs12 md12 lg12>
               <v-card>
                 <v-card-title>
                   Broswse motif instances:
