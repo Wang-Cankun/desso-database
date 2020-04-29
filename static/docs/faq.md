@@ -19,7 +19,7 @@ The google, firfox and safari.
 
 Before developing this server, we applied the main top deep learning model to find motif on the 185 chip-seq datasets. In our experiments, we evaluate the performance of all deep learning models from two aspects including find motifs and peaks classification. About the first aspect we compare all deep learning models' performance by computing the P-value, E-value, and Q-value of motifs. with regarding to the second one, we select eight criterions to evaluate the capacities that identify the peaks is TFs binding site or not, finally we summary eight criterions as the area of octagon.  
 Accoding to the area of each deep learning model shown as figure1, the Basset model obtainded the best performance about peaks classification and the DESSO model obtainded the best performance about finding motifs.
-![figure2](./figures/Figure1_202002112.png)  
+![figure2](/docs/figures/background_figure1.png)  
 Figure 1. A characterization of the 20 methods evaluated in this study and their overall evaluation results
 
 ## How many moitf databases are compared on this server.
@@ -46,7 +46,7 @@ we select 6 of 10 samples with peak length of 50k from the GSE117309 as total si
 ### method A
 
 Now, there is novel deep learning model named DEESO (Yang, 2019), which has some specificities about motif prediction. The DESSO model is the first tool to use the structure shape of DNA to find motifs, and obtain the best performance compared to the existed deep learning tools,such as Deepbind, Basset, etc.
-![Desso](./figures/desso_workflow.png)
+![Desso](/docs/figures/desso_workflow.png)
 
 Figure 1. Schematic overview of DESSO framework.
 A.The CNN model for optimizing motif detectors; B.Determination of optimal motif instances recognized by each motif detector; C. Construction of the optimized motif profile. This algorithm of DESSO is depicted in detail, please see the section algorithm.
@@ -54,7 +54,7 @@ A.The CNN model for optimizing motif detectors; B.Determination of optimal motif
 ### method B
 
 The Basset model can be also used to find motifs from the genomics data, and we have located the Basset model for each transcription factor.we have selected 185 cancers related transcription factors, and compared to the existed 19 deep learning models about peaks classification. Finally, our experimental results show that the Basset model obtained the highest score for peaks prediction.
-![Desso](figures/basset_workflow.png)
+![Desso](/docs/figures/basset_workflow.png)
 
 ## How many datasets are utilized on the website?
 

@@ -32,7 +32,7 @@ A DNA motif is a region of DNA that regulates the expression of downstream genes
 
 Before developing this server, we applied the main top deep learning model to find motif on the 185 chip-seq datasets. In our experiments, we evaluate the performance of all deep learning models from two aspects including find motifs and peaks classification. About the first aspect we compare all deep learning models' performance by computing the P-value, E-value, and Q-value of motifs. with regarding to the second one, we select eight criterions to evaluate the capacities that identify the peaks is TFs binding site or not, finally we summary eight criterions as the area of octagon.  
 Accoding to the area of each deep learning model shown as figure1, the Basset model obtainded the best performance about peaks classification and the DESSO model obtainded the best performance about finding motifs.
-![Figure1](/assets/docs/figures/background_figure1.png)
+![Figure1](/docs/figures/background_figure1.png)
 Figure 1. A characterization of the 20 methods evaluated in this study and their overall evaluation results
 
 ## What kinds of formats of input sequences are suitable for this server to find motifs.
