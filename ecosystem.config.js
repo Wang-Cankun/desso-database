@@ -6,7 +6,7 @@ module.exports = {
       port: 9002,
       watch: '.',
       args: 'start -H 0.0.0.0',
-      max_memory_restart: '5GB',
+      max_memory_restart: '5G',
       log_date_format: 'YYYY-MM=DD HH:mm:ss',
       env: {
         NODE_ENV: 'production'
