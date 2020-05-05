@@ -14,7 +14,7 @@
 
 <script>
 import Fab from '@/components/utils/Fab'
-import toc from '@/components/utils/toc'
+import toc from '@/components/utils/Toc'
 export default {
   components: {
     Fab,
