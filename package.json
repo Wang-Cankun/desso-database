@@ -5,9 +5,9 @@
   "author": "Cankun Wang",
   "private": true,
   "scripts": {
-    "dev": "nuxt --port 3333",
+    "dev": "nuxt --hostname 0.0.0.0 --port 3333",
     "build": "nuxt build",
-    "start": "nuxt-start -p 9002",
+    "start": "nuxt-start -p 9002 -H 0.0.0.0",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore."
   },

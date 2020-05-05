@@ -5,9 +5,12 @@ module.exports = {
       script: './node_modules/nuxt-start/bin/nuxt-start.js',
       port: 9002,
       watch: '.',
-      args: 'start',
-      max_memory_restart: '250M',
-      log_date_format: 'YYYY-MM=DD HH:mm:ss'
+      args: 'start -H 0.0.0.0',
+      max_memory_restart: '5GB',
+      log_date_format: 'YYYY-MM=DD HH:mm:ss',
+      env: {
+        NODE_ENV: 'production'
+      }
     }
   ],
 
