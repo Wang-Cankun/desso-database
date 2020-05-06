@@ -13,6 +13,12 @@ export const mutations = {
   },
   SET_TFBS(state, tfbs) {
     state.tfbs = tfbs
+  },
+  SET_MATRIX(state, matrix) {
+    state.matrix = matrix
+  },
+  SET_DATASET_ANNOTATION(state, annotation) {
+    state.annotation = annotation
   }
 }
 export const actions = {
@@ -24,6 +30,16 @@ export const actions = {
   fetchMotif({ commit }, id) {
     return MotifService.getMotif(id).then(function(response) {
       commit('SET_MOTIF', response.data)
+    })
+  },
+  fetchDatasetAnnotation({ commit }, id) {
+    return MotifService.getDatasetAnnotation(id).then(function(response) {
+      commit('SET_DATASET_ANNOTATION', response.data)
+    })
+  },
+  fetchMatrix({ commit }, id) {
+    return MotifService.getMatrix(id).then(function(response) {
+      commit('SET_MATRIX', response.data)
     })
   },
   fetchTfbs({ commit }, id) {

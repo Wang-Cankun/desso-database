@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-  baseURL: `http://127.0.0.1:9001/api/desso`,
+  baseURL: `http://localhost:8889/api/desso`,
+  // baseURL: `http://bmi-bmbl-vp01.bmi.osumc.edu:9001/api/desso`,
   withCredentials: false,
   headers: {
     Accept: 'application/json',
@@ -15,6 +16,12 @@ export default {
   },
   getMotif(id) {
     return apiClient.get('/info/' + id)
+  },
+  getDatasetAnnotation(id) {
+    return apiClient.get('/info/' + id + '/annotation')
+  },
+  getMatrix(id) {
+    return apiClient.get('/matrix/' + id)
   },
   getTfbs(id) {
     return apiClient.get('/sites/' + id)
