@@ -4,10 +4,116 @@
       <v-flex>
         <v-container fluid grid-list-md>
           <v-layout row wrap>
-            <v-flex xs12 md12 lg12>
-              <v-card>
+            <v-flex xs4 md4 lg4>
+              <v-card hover height="100%" class="card-outter">
                 <v-card-title>
-                  Broswse motif instances:
+                  Enrichment score:
+                  <v-spacer></v-spacer>
+                  <v-img src="/img/motif_logo/enrichmentScore1.png" />
+                </v-card-title>
+                <v-card-actions class="card-actions">
+                  <a
+                    href="/img/motif_logo/enrichmentScore1.png"
+                    target="_blank"
+                    style="text-decoration:none;"
+                    ><v-btn text color="secondary">
+                      Download
+                    </v-btn></a
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-flex>
+            <v-flex xs3 md3 lg3>
+              <v-card hover>
+                <v-card-title>
+                  Coverage:
+                  <v-img src="/img/motif_logo/DGF1.png" /> </v-card-title
+                ><v-spacer></v-spacer
+                ><v-card-actions>
+                  <a
+                    href="/img/motif_logo/DGF1.png"
+                    target="_blank"
+                    style="text-decoration:none;"
+                    ><v-btn text color="secondary">
+                      Download
+                    </v-btn></a
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-flex>
+            <v-flex xs4 md4 lg3>
+              <v-card hover>
+                <v-card-title>
+                  Conservation:
+
+                  <v-img src="/img/motif_logo/phastCons1.png" /> </v-card-title
+                ><v-spacer></v-spacer
+                ><v-card-actions>
+                  <a
+                    href="/img/motif_logo/phastCons1.png"
+                    target="_blank"
+                    style="text-decoration:none;"
+                    ><v-btn text color="secondary">
+                      Download
+                    </v-btn></a
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-flex>
+            <v-flex xs12 md12 lg12>
+              <v-card hover height="100%" class="card-outter">
+                <v-card-title>
+                  Position frequency matrix:
+                </v-card-title>
+                <span>A: </span>
+                <span v-for="item in matrix" :key="item.id">
+                  <span v-if="item.rows == 'A'">{{ item.vals }} </span>
+                </span>
+                <v-divider></v-divider>
+                <span>C: </span>
+                <span v-for="item in matrix" :key="item.id">
+                  <span v-if="item.rows == 'C'">{{ item.vals }} </span> </span
+                ><v-divider></v-divider>
+                <span>G: </span>
+                <span v-for="item in matrix" :key="item.id">
+                  <span v-if="item.rows == 'A'">{{ item.vals }} </span> </span
+                ><v-divider></v-divider>
+                <span>T: </span>
+                <span v-for="item in matrix" :key="item.id">
+                  <span v-if="item.rows == 'A'">{{ item.vals }} </span> </span
+                ><v-divider></v-divider>
+                <v-card-actions class="card-actions">
+                  <a
+                    href="/img/motif_logo/test1.jaspar"
+                    target="_blank"
+                    style="text-decoration:none;"
+                    ><v-btn text color="secondary">
+                      JASPAR
+                    </v-btn></a
+                  >
+                  <a
+                    href="/img/motif_logo/test1.meme"
+                    target="_blank"
+                    style="text-decoration:none;"
+                    ><v-btn text color="secondary">
+                      MEME
+                    </v-btn></a
+                  >
+                  <a
+                    href="/img/motif_logo/test1.pfm"
+                    target="_blank"
+                    style="text-decoration:none;"
+                    ><v-btn text color="secondary">
+                      Raw matrix
+                    </v-btn></a
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-flex>
+            <v-flex xs12 md12 lg12>
+              <v-card hover>
+                <v-card-title>
+                  Browse motif instances:
                   <v-spacer></v-spacer>
                   <v-text-field
                     v-model="search"
@@ -40,6 +146,7 @@ export default {
   async asyncData({ store, error, params }) {
     try {
       await store.dispatch('motifs/fetchTfbs', params.id)
+      await store.dispatch('motifs/fetchMatrix', params.id)
     } catch (e) {
       error({
         statusCode: 503,
@@ -68,12 +175,13 @@ export default {
     }
   },
   computed: mapState({
-    tfbs: (state) => state.motifs.tfbs
+    tfbs: (state) => state.motifs.tfbs,
+    matrix: (state) => state.motifs.matrix
   }),
 
   head() {
     return {
-      title: '1',
+      title: 'Motif details',
       meta: [
         {
           hid: 'description',
@@ -126,5 +234,14 @@ export default {
 .list-group > .list-item {
   padding: 1em 0;
   border-bottom: solid 1px #e5e5e5;
+}
+
+.card-outter {
+  position: relative;
+  padding-bottom: 50px;
+}
+.card-actions {
+  position: absolute;
+  bottom: 0;
 }
 </style>
