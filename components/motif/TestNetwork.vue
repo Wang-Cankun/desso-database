@@ -2,16 +2,18 @@
   <no-ssr>
     <v-hover v-slot:default="{ hover }" open-delay="0">
       <v-card
-        class="mx-auto"
+        height="100%"
+        class="mx-auto card-outter"
         :elevation="hover ? 10 : 2"
         :class="{ 'on-hover': hover }"
       >
         <v-card-title class="accent white--text subtitle-1"
-          >Network</v-card-title
+          >TF-gene network</v-card-title
         >
         <div>
           <cytoscape
             ref="cyRef"
+            style="height: 500px;"
             :config="config"
             @mousedown="addNode"
             @cxttapstart="updateNode"
@@ -25,7 +27,7 @@
           </cytoscape>
         </div>
 
-        <v-card-actions>
+        <v-card-actions class="card-actions">
           <v-btn text color="secondary">
             Edit in new page
           </v-btn>
@@ -39,22 +41,49 @@
 const config = {
   elements: [
     {
-      data: { id: 'a' },
-      position: { x: 589, y: 182 },
+      data: { id: 'ARID1A' },
+      position: { x: 489, y: 182 },
       group: 'nodes'
     },
     {
-      data: { id: 'b' },
-      position: { x: 689, y: 282 },
+      data: { id: 'FOXD1' },
+      position: { x: 589, y: 282 },
       group: 'nodes'
     },
     {
-      data: { id: 'c' },
-      position: { x: 489, y: 282 },
+      data: { id: 'FOXC1' },
+      position: { x: 389, y: 182 },
       group: 'nodes'
     },
     {
-      data: { id: 'ab', source: 'a', target: 'b' },
+      data: { id: 'FOXL1' },
+      position: { x: 419, y: 382 },
+      group: 'nodes',
+      color: 'red'
+    },
+    {
+      data: { id: 'FOXI' },
+      position: { x: 449, y: 482 },
+      group: 'nodes'
+    },
+    {
+      data: { id: 'a1', source: 'ARID1A', target: 'FOXD1' },
+      group: 'edges'
+    },
+    {
+      data: { id: 'a2', source: 'ARID1A', target: 'FOXC1' },
+      group: 'edges'
+    },
+    {
+      data: { id: 'a3', source: 'ARID1A', target: 'FOXL1' },
+      group: 'edges'
+    },
+    {
+      data: { id: 'a4', source: 'ARID1A', target: 'FOXI' },
+      group: 'edges'
+    },
+    {
+      data: { id: 'a5', source: 'ARID1A', target: 'FOXD1' },
       group: 'edges'
     }
   ],
@@ -108,3 +137,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.card-outter {
+  position: relative;
+  padding-bottom: 50px;
+}
+.card-actions {
+  position: absolute;
+  bottom: 0;
+}
+</style>
