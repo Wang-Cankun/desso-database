@@ -1,6 +1,7 @@
 <template>
   <v-hover v-slot:default="{ hover }" open-delay="0">
     <v-card
+      height="100%"
       class="mx-auto"
       :elevation="hover ? 10 : 2"
       :class="{ 'on-hover': hover }"
@@ -9,7 +10,7 @@
         >Transcription factor information</v-card-title
       >
       <v-card-text>
-        <p class="my-3 text--primary">Data ID: {{ tf.data_id }}</p>
+        <p class="subtitle-1 my-3 text--primary">Data ID: {{ tf.data_id }}</p>
         <p class="display-1 text--primary">{{ tf.tf_name }}</p>
         <v-img src="/img/motif_logo/DE00000102.png"></v-img>
       </v-card-text>
@@ -39,23 +40,20 @@
             <v-divider class="my-0 py-0"></v-divider>
           </v-card-title>
           <v-card-text>
-            <p class="my-0">
-              <span class="text--secondary">Dataset source:: </span>
-              <span class="text--primary">source link</span>
-            </p>
-
-            <p class="my-0">
-              <span class="text--secondary">Experiment: </span>
-              <span class="text--primary">experiment link</span>
-            </p>
-            <p class="my-0">
-              <span class="text--secondary">Lab: </span>
-              <span class="text--primary">Lab</span>
-            </p>
-            <p class="my-0">
-              <span class="text--secondary">Pubmed ID: </span>
-              <span class="text--primary">PMED00000001</span>
-            </p>
+            <div v-for="item in terms" :key="item.id">
+              <p class="my-0">
+                <span class="text--secondary">{{ item.title }}</span>
+                <span v-if="item.link" class="text--primary"
+                  ><a
+                    :href="item.link"
+                    target="_blank"
+                    style="text-decoration:none;"
+                    >{{ item.value }}
+                  </a></span
+                >
+                <span v-else class="text--primary">{{ item.value }}</span>
+              </p>
+            </div>
           </v-card-text></v-flex
         >
         <v-flex xs12 md12 lg5
@@ -167,7 +165,10 @@
 
       <v-card-actions>
         <v-btn text color="secondary">
-          Predict motif from your data
+          Predict motifs from your data
+        </v-btn>
+        <v-btn text color="secondary">
+          Scan motifs
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -181,6 +182,55 @@ export default {
     tf: {
       type: Object,
       required: true
+    },
+    annotation: {
+      type: Array,
+      required: true
+    }
+  },
+  computed: {
+    terms() {
+      const info = []
+      for (const element of this.annotation) {
+        switch (element.key) {
+          case 'encode_id':
+            info.push({
+              key: element.key,
+              value: element.value,
+              title: 'ENCODE experiment: ',
+              link: 'https://www.encodeproject.org/experiments/' + element.value
+            })
+            break
+          case 'old_encode_id':
+            info.push({
+              key: element.key,
+              value: element.value,
+              title: 'Old ENCODE ID: ',
+              link:
+                'http://genome.ucsc.edu/cgi-bin/hgTracks?tsCurTab=advancedTab&tsGroup=Any&tsType=Any&hgt_mdbVar1=dccAccession&hgt_tSearch=search&hgt_tsDelRow=&hgt_tsAddRow=&hgt_tsPage=&tsSimple=&tsName=&tsDescr=&db=hg19&hgt_mdbVal1=' +
+                element.value
+            })
+            break
+          case 'pubmed_id':
+            info.push({
+              key: element.key,
+              value: element.value,
+              title: 'PubMed: ',
+              link: 'https://www.ncbi.nlm.nih.gov/pubmed/' + element.value
+            })
+            break
+          case 'lab':
+            info.push({
+              key: element.key,
+              value: element.value,
+              title: 'Lab: ',
+              link: ''
+            })
+            break
+          default:
+        }
+      }
+      return info
     }
   }
 }
