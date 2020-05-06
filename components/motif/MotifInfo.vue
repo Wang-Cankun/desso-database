@@ -8,53 +8,65 @@
       :class="{ 'on-hover': hover }"
     >
       <v-card-text>
-        <p class="text--primary">Motif ID: {{ motif.base_id }}</p>
-        <v-img src="/img/motif_logo/DE00000101.png" />
-        <p class="text--primary ma-0">Class: {{ motif.tf_class }}</p>
-        <p class="text--primary ma-0">Family: {{ motif.tf_family }}</p>
+        <p
+          v-if="motif.motif_type == 'SHAPE'"
+          class="subtitle-1 text--primary ma-0"
+        >
+          Group: HelT
+        </p>
+        <p class="subtitle-1 text--primary ma-0">
+          Motif ID: {{ motif.base_id }}
+        </p>
+        <v-img
+          v-if="motif.motif_type == 'SEQUENCE'"
+          src="/img/motif_logo/DE00000101.png"
+        />
+        <v-img v-else src="/img/motif_logo/shapelogo1.png" />
+
         <p class="text--primary ma-0">
           Collection:
           {{ motif.collection.toLowerCase() }} motif
         </p>
+        <div v-if="motif.motif_type == 'SEQUENCE'">
+          <p class="text--primary ma-0">Class: {{ motif.tf_class }}</p>
+          <p class="text--primary ma-0">Family: {{ motif.tf_family }}</p>
 
-        <p class="text--primary ma-0">
-          Type: {{ motif.motif_type.toLowerCase() }} motif
-        </p>
-        <v-divider></v-divider>
-        <p class="text--primary ma-0">
-          TF name in JASPAR:
-          <span class="font-weight-bold">
-            <a
-              href="http://jaspar.genereg.net/matrix/MA0080.1/"
-              target="_blank"
-              style="text-decoration:none;"
+          <v-divider></v-divider>
+          <p class="text--primary ma-0">
+            TF name in JASPAR:
+            <span class="font-weight-bold">
+              <a
+                href="http://jaspar.genereg.net/matrix/MA0080.1/"
+                target="_blank"
+                style="text-decoration:none;"
+              >
+                {{ motif.tf_name_jaspar }}</a
+              >
+            </span>
+          </p>
+          <p class="text--primary ma-0">
+            TF name in HOCOMOCO:
+            <span class="font-weight-bold"
+              ><a
+                href="http://jaspar.genereg.net/matrix/MA0080.1/"
+                target="_blank"
+                style="text-decoration:none;"
+                >{{ motif.tf_name_hocomoco }}</a
+              ></span
             >
-              {{ motif.tf_name_jaspar }}</a
+          </p>
+          <p class="text--primary ma-0">
+            TF name in Transfac:
+            <span class="font-weight-bold"
+              ><a
+                href="http://jaspar.genereg.net/matrix/MA0080.1/"
+                target="_blank"
+                style="text-decoration:none;"
+                >{{ motif.tf_name_transfac }}</a
+              ></span
             >
-          </span>
-        </p>
-        <p class="text--primary ma-0">
-          TF name in HOCOMOCO:
-          <span class="font-weight-bold"
-            ><a
-              href="http://jaspar.genereg.net/matrix/MA0080.1/"
-              target="_blank"
-              style="text-decoration:none;"
-              >{{ motif.tf_name_hocomoco }}</a
-            ></span
-          >
-        </p>
-        <p class="text--primary ma-0">
-          TF name in Transfac:
-          <span class="font-weight-bold"
-            ><a
-              href="http://jaspar.genereg.net/matrix/MA0080.1/"
-              target="_blank"
-              style="text-decoration:none;"
-              >{{ motif.tf_name_transfac }}</a
-            ></span
-          >
-        </p>
+          </p>
+        </div>
       </v-card-text>
       <v-card-actions>
         <nuxt-link
