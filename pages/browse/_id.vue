@@ -3,21 +3,39 @@
     <v-layout>
       <v-container fluid grid-list-md>
         <v-layout row wrap>
-          <v-flex xs12 md12 lg4>
-            <tf-info :tf="motif[0]"></tf-info>
+          <v-flex xs12 md12 lg6>
+            <tf-info :tf="motif[0]" :annotation="annotation"></tf-info>
           </v-flex>
-          <v-flex xs12 md12 lg4>
-            <motif-circos></motif-circos>
-          </v-flex>
-          <v-flex xs12 md12 lg4>
+          <v-flex xs12 md12 lg6>
             <motif-network></motif-network>
           </v-flex>
         </v-layout>
-        <v-layout row wrap>
-          <v-flex v-for="(n, i) in motif.length" :key="n" xs12 md6 lg3>
-            <motif-info :motif="motif[i]"></motif-info>
-          </v-flex>
-        </v-layout>
+        <v-card elevation="2">
+          <v-card-title class="accent white--text subtitle-1"
+            >Sequence motifs</v-card-title
+          >
+          <v-layout row wrap>
+            <v-flex v-for="(n, i) in motif.length" :key="n" xs12 md6 lg3>
+              <motif-info
+                v-if="motif[i].motif_type == 'SEQUENCE'"
+                :motif="motif[i]"
+              ></motif-info>
+            </v-flex>
+          </v-layout>
+        </v-card>
+        <v-card elevation="2">
+          <v-card-title class="accent white--text subtitle-1"
+            >Shape motifs</v-card-title
+          >
+          <v-layout row wrap>
+            <v-flex v-for="(n, i) in motif.length" :key="n" xs12 md6 lg3>
+              <motif-info
+                v-if="motif[i].motif_type == 'SHAPE'"
+                :motif="motif[i]"
+              ></motif-info>
+            </v-flex>
+          </v-layout>
+        </v-card>
         <Fab></Fab>
       </v-container>
     </v-layout>
@@ -29,18 +47,17 @@ import Fab from '@/components/utils/Fab'
 import TFInfo from '@/components/motif/TFInfo'
 import MotifInfo from '@/components/motif/MotifInfo'
 import MotifNetwork from '@/components/motif/TestNetwork'
-import MotifCircos from '@/components/motif/MotifCircos'
 export default {
   components: {
     'tf-info': TFInfo,
     'motif-info': MotifInfo,
     'motif-network': MotifNetwork,
-    'motif-circos': MotifCircos,
     Fab
   },
   async asyncData({ store, error, params }) {
     try {
       await store.dispatch('motifs/fetchMotif', params.id)
+      await store.dispatch('motifs/fetchDatasetAnnotation', params.id)
     } catch (e) {
       error({
         statusCode: 503,
@@ -49,11 +66,12 @@ export default {
     }
   },
   computed: mapState({
-    motif: (state) => state.motifs.motif
+    motif: (state) => state.motifs.motif,
+    annotation: (state) => state.motifs.annotation
   }),
   head() {
     return {
-      title: this.motif.data_id,
+      title: this.motif[0].tf_name + ' - ' + this.motif[0].data_id,
       meta: [
         {
           hid: 'description',
