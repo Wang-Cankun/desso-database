@@ -4,20 +4,13 @@
 
 Short description about the primary functions of the server, including peaks classification, motif finding and motif analyses.
 
-## Introduction for DESSO server
+## What is DESSO and what can it do?
 
 One of the most fundamental questions in biology is how to understand the transcription factor binding and regulated mechanism. Larger-scale chip-seq sequencing and biology experiment studies are now rapidly opening up new ways to track this question by this binding mode from transcription faactor. Here, we developed the DESSO databases, aiming to provide a service for users to find and analysis motifs from their data.
 
 ## Overview for DESSO server
 
 By manually curating several the state-of-art models, which is used to find motifs. we collected 185 transcription factors related to 20 cancer types, to evaluate deep learning models. In the light of the experimental results, DESSO model obtained the best result on finding motifs, Basset model obtained the best performance on peaks classification. Based on the published paper, the DESSO model also obtained the best performance on 690 chips-seq datas. In this server, we installed these two model to performan two kinds of tasks, and we also published the found motifs of the DESSO, the trained model for each transcription factor. regarding to the Basset mode, we also deployed the trained model for peaks classification, because of its best perfomance. Meanwhile, the single-cell chip-seq experiment is a challenge for people, because of the limitted technology. We collect the single-cell chips-seq data to finding motifs by using deep learning models.
-
-## What is DNA motif
-
-Gene regulation mechanism is an important biological field, the gene expression is controlled by transcription factors, which is regulatory protein and bind to DNA. Each transcription factor (TF) has a specific binding site (TFBS), and each kind of TFBS also has a unique binding model, named motif.
-A DNA motif is a region of DNA that regulates the expression of downstream genes located on that same molecule of DNA, i.e., a chromosome. This concept is equivalent to a DNA cis-regulatory element or cis-element. It contains the transcription factor binding sites (TFBSs) and other conserved functional elements in the 5 intergenic regions of genes.
-
-## What can this server do in motif analyses.
 
 > **Our server has a number of novel capabilities:**  
 > (i) find TFs are related to cancer types  
@@ -27,6 +20,25 @@ A DNA motif is a region of DNA that regulates the expression of downstream genes
 > (v) motif scanning  
 > (vi) annotation genes to TFs binding sites
 > (vii) finding motifs from the single-cell schip-seq dataset
+
+## What is DNA sequence motif
+
+Gene regulation mechanism is an important biological field, the gene expression is controlled by transcription factors, which is regulatory protein and bind to DNA. Each transcription factor (TF) has a specific binding site (TFBS), and each kind of TFBS also has a unique binding model, named motif.
+A DNA motif is a region of DNA that regulates the expression of downstream genes located on that same molecule of DNA, i.e., a chromosome. This concept is equivalent to a DNA cis-regulatory element or cis-element. It contains the transcription factor binding sites (TFBSs) and other conserved functional elements in the 5 intergenic regions of genes.
+
+## What is DNA shape?
+
+## What is DNA shape motif?
+
+## What is deep learning?
+
+## What is ChIP-seq?
+
+## What can this server do in motif analyses.
+
+## What is a position weight matrix (PWM)?
+
+## What is motif scanning?
 
 ## Why we deploy the Basset model on this server.
 
