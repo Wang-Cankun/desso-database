@@ -1,19 +1,151 @@
 <template>
-  <div id="app">
-    <nav-bar />
-    <nuxt />
-  </div>
+  <v-app id="keep">
+    <v-app-bar app clipped-left clipped-right :color="appBarColor" dark>
+      <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
+      <v-toolbar-title style="width: 300px" class="ml-2 pl-4">
+        <nuxt-link to="/">
+          <span class="app-bar-title hidden-sm-and-down">{{ title }}</span>
+        </nuxt-link>
+      </v-toolbar-title>
+      <search-box></search-box>
+      <v-spacer />
+    </v-app-bar>
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      clipped
+      hide-overlay
+      class="grey lighten-4"
+      width="325"
+    >
+      <v-list dense class="grey lighten-4" shaped>
+        <template v-for="(item, i) in items">
+          <v-list-item
+            v-if="!item.sublinks"
+            :key="i"
+            :to="item.url"
+            active-class="blue lighten-4"
+          >
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-title class="black--text">
+              {{ item.text }}
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-group
+            v-else
+            :key="i"
+            :to="item.url"
+            active-class="blue lighten-5"
+          >
+            <template v-slot:activator>
+              <v-list-item-action active-class="blue lighten-4">
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-title class="black--text">
+                {{ item.text }}
+              </v-list-item-title>
+            </template>
+            <v-list-item
+              v-for="sublink in item.sublinks"
+              :key="sublink.text"
+              class="px-8"
+              :to="sublink.url"
+              active-class="blue lighten-4"
+            >
+              <v-list-item-action>
+                <v-icon>{{ sublink.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-title class="black--text">
+                {{ sublink.text }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list-group>
+        </template>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-content>
+      <v-container class="px-6">
+        <nuxt />
+      </v-container>
+    </v-content>
+
+    <v-footer
+      app
+      inset
+      absolute
+      class="font-weight-light"
+      heigth="200"
+      width="auto"
+    >
+      <v-col class="text-center caption" cols="12">
+        DESSO is developed by <a href="https://u.osu.edu/bmbl/">BMBL</a> and it
+        is licensed under
+        <a href="https://creativecommons.org/licenses/by/4.0/"
+          ><v-icon>mdi-creative-commons</v-icon> Creative Commons Attribution
+          4.0 International License</a
+        >. | {{ new Date().getFullYear() }}
+      </v-col>
+    </v-footer>
+  </v-app>
 </template>
 <script>
-import NavBar from '~/components/NavBar.vue'
-
+import SearchBox from '@/components/utils/SearchBox'
 export default {
   components: {
-    NavBar
+    'search-box': SearchBox
+  },
+  data() {
+    return {
+      drawer: null,
+      title: 'DESSO database',
+      appBarColor: 'primary',
+      appBarTextColor: '#ccccd6', // 远山紫
+      items: [
+        { icon: 'mdi-home', text: 'Home', url: '/' },
+        { icon: 'mdi-table', text: 'Browse', url: '/browse' },
+        {
+          icon: 'mdi-file-find-outline',
+          text: 'Prediction',
+          url: '/prediction'
+        },
+        {
+          icon: 'mdi-help-box',
+          text: 'Help',
+          to: '/help',
+          sublinks: [
+            {
+              icon: 'mdi-account-question',
+              text: 'Usage',
+              url: '/help/usage'
+            },
+            {
+              icon: 'mdi-book-open-page-variant',
+              text: 'Background information',
+              url: '/help/background'
+            },
+            {
+              icon: 'mdi-frequently-asked-questions',
+              text: 'Frequently asked questions',
+              url: '/help/faq'
+            },
+            {
+              icon: 'mdi-api',
+              text: 'API documentation',
+              url: '/help/api'
+            }
+          ]
+        },
+        { icon: 'mdi-download', text: 'Downloads', url: '/downloads' },
+        { icon: 'mdi-information', text: 'About us', url: '/about' }
+      ]
+    }
   },
   head() {
     return {
-      titleTemplate: '%s - Real World Events',
+      titleTemplate: '%s - DESSO database',
       meta: [
         {
           hid: 'default description',
@@ -27,239 +159,13 @@ export default {
 </script>
 
 <style>
-html {
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.app-bar-title {
+  color: white;
 }
-body {
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-}
-#app {
-  box-sizing: border-box;
-  width: 500px;
-  padding: 0 20px 20px;
-  margin: 0 auto;
-}
-hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
-}
-a {
-  color: #39b982;
-  font-weight: 600;
-  background-color: transparent;
-}
-img {
-  border-style: none;
-  width: 100%;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  display: flex;
-  align-items: center;
-  font-family: 'Montserrat', sans-serif;
-}
-h1 {
-  font-size: 50px;
-  font-weight: 700;
-}
-h2 {
-  font-size: 38px;
-  font-weight: 700;
-}
-h3 {
-  font-size: 28px;
-  font-weight: 700;
-}
-h4 {
-  font-size: 21px;
-  font-weight: 700;
-}
-h5 {
-  font-size: 16px;
-  font-weight: 700;
-}
-h6 {
-  font-size: 15px;
-  font-weight: 700;
-}
-b,
-strong {
-  font-weight: bolder;
-}
-small {
-  font-size: 80%;
-}
-.eyebrow {
-  font-size: 20px;
-}
-.-text-primary {
-  color: #39b982;
-}
-.-text-base {
-  color: #000;
-}
-.-text-error {
-  color: tomato;
-}
-.-text-gray {
-  color: rgba(0, 0, 0, 0.5);
-}
-.-shadow {
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.13);
-}
-.badge {
-  display: inline-flex;
-  height: 26px;
-  width: auto;
-  padding: 0 7px;
-  margin: 0 5px;
-  background: transparent;
-  border-radius: 13px;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 26px;
-}
-.badge.-fill-gradient {
-  background: linear-gradient(to right, #16c0b0, #84cf6a);
-  color: #fff;
-}
-button,
-label,
-input,
-optgroup,
-select,
-textarea {
-  display: inline-flex;
-  font-family: 'Open sans', sans-serif;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-button,
-input {
-  overflow: visible;
-}
-button,
-select {
-  text-transform: none;
-}
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-  -webkit-appearance: none;
-}
-button::-moz-focus-inner,
-[type='button']::-moz-focus-inner,
-[type='reset']::-moz-focus-inner,
-[type='submit']::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-button:-moz-focusring,
-[type='button']:-moz-focusring,
-[type='reset']:-moz-focusring,
-[type='submit']:-moz-focusring {
-  outline: 2px solid #39b982;
-}
-label {
-  color: rgba(0, 0, 0, 0.5);
-  font-weight: 700;
-}
-input,
-textarea {
-  box-sizing: border-box;
-  border: solid 1px rgba(0, 0, 0, 0.4);
-}
-textarea {
-  width: 100%;
-  overflow: auto;
-  font-size: 20px;
-}
-[type='checkbox'],
-[type='radio'] {
-  box-sizing: border-box;
-  padding: 0;
-}
-[type='number']::-webkit-inner-spin-button,
-[type='number']::-webkit-outer-spin-button {
-  height: auto;
-}
-[type='search'] {
-  -webkit-appearance: textfield;
-  outline-offset: -2px;
-}
-[type='search']::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-[type='text'],
-[type='number'],
-[type='search'],
-[type='password'] {
-  height: 52px;
-  width: 100%;
-  padding: 0 10px;
-  font-size: 20px;
-}
-[type='text']:focus,
-[type='number']:focus,
-[type='search']:focus,
-[type='password']:focus {
-  border-color: #39b982;
-}
-::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
-}
-[hidden] {
+#keep .v-navigation-drawer__border {
   display: none;
 }
-.error {
-  border: 1px solid red;
-}
-select {
-  width: 100%;
-  height: 52px;
-  padding: 0 24px 0 10px;
-  vertical-align: middle;
-  background: #fff
-    url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E")
-    no-repeat right 12px center;
-  background-size: 8px 10px;
-  border: solid 1px rgba(0, 0, 0, 0.4);
-  border-radius: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-select:focus {
-  border-color: #39b982;
-  outline: 0;
-}
-select:focus::ms-value {
-  color: #000;
-  background: #fff;
-}
-select::ms-expand {
-  opacity: 0;
-}
-.field {
-  margin-bottom: 24px;
-}
-.error {
-  border: 1px solid red;
-}
-.errorMessage {
-  color: red;
+.v-footer a {
+  text-decoration: none;
 }
 </style>
