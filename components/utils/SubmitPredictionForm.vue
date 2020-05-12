@@ -49,7 +49,10 @@
             <v-col cols="12" md="8">
               <v-radio-group v-model="uploadType">
                 <span class="title">Input the genomic regions</span>
-                <v-radio label="Upload BED file." value="upload"></v-radio>
+                <v-radio
+                  label="Upload BED file. Example:"
+                  value="upload"
+                ></v-radio>
                 <v-radio label="Type in BED data." value="type"></v-radio>
               </v-radio-group>
             </v-col>
