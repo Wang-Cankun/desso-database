@@ -15,6 +15,8 @@ We are always looking for ways to improve the server! Please use our contact ema
 
 The google, firfox and safari.
 
+## How did you generate cancer-related data?
+
 ## Why we deploy the Basset model on this server.
 
 Before developing this server, we applied the main top deep learning model to find motif on the 185 chip-seq datasets. In our experiments, we evaluate the performance of all deep learning models from two aspects including find motifs and peaks classification. About the first aspect we compare all deep learning models' performance by computing the P-value, E-value, and Q-value of motifs. with regarding to the second one, we select eight criterions to evaluate the capacities that identify the peaks is TFs binding site or not, finally we summary eight criterions as the area of octagon.  
