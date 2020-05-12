@@ -1,44 +1,42 @@
 <template>
   <div>
-    <v-layout>
-      <v-container fluid grid-list-md>
+    <v-container fluid grid-list-md>
+      <v-layout row wrap>
+        <v-flex xs12 md12 lg6>
+          <tf-info :tf="motif[0]" :annotation="annotation"></tf-info>
+        </v-flex>
+        <v-flex xs12 md12 lg6>
+          <motif-network></motif-network>
+        </v-flex>
+      </v-layout>
+      <v-card elevation="2">
+        <v-card-title class="accent white--text subtitle-1"
+          >Sequence motifs</v-card-title
+        >
         <v-layout row wrap>
-          <v-flex xs12 md12 lg6>
-            <tf-info :tf="motif[0]" :annotation="annotation"></tf-info>
-          </v-flex>
-          <v-flex xs12 md12 lg6>
-            <motif-network></motif-network>
+          <v-flex v-for="(n, i) in motif.length" :key="n" xs12 md6 lg3>
+            <motif-info
+              v-if="motif[i].motif_type == 'SEQUENCE'"
+              :motif="motif[i]"
+            ></motif-info>
           </v-flex>
         </v-layout>
-        <v-card elevation="2">
-          <v-card-title class="accent white--text subtitle-1"
-            >Sequence motifs</v-card-title
-          >
-          <v-layout row wrap>
-            <v-flex v-for="(n, i) in motif.length" :key="n" xs12 md6 lg3>
-              <motif-info
-                v-if="motif[i].motif_type == 'SEQUENCE'"
-                :motif="motif[i]"
-              ></motif-info>
-            </v-flex>
-          </v-layout>
-        </v-card>
-        <v-card elevation="2">
-          <v-card-title class="accent white--text subtitle-1"
-            >Shape motifs</v-card-title
-          >
-          <v-layout row wrap>
-            <v-flex v-for="(n, i) in motif.length" :key="n" xs12 md6 lg3>
-              <motif-info
-                v-if="motif[i].motif_type == 'SHAPE'"
-                :motif="motif[i]"
-              ></motif-info>
-            </v-flex>
-          </v-layout>
-        </v-card>
-        <Fab></Fab>
-      </v-container>
-    </v-layout>
+      </v-card>
+      <v-card elevation="2">
+        <v-card-title class="accent white--text subtitle-1"
+          >Shape motifs</v-card-title
+        >
+        <v-layout row wrap>
+          <v-flex v-for="(n, i) in motif.length" :key="n" xs12 md6 lg3>
+            <motif-info
+              v-if="motif[i].motif_type == 'SHAPE'"
+              :motif="motif[i]"
+            ></motif-info>
+          </v-flex>
+        </v-layout>
+      </v-card>
+      <Fab></Fab>
+    </v-container>
   </div>
 </template>
 <script>
