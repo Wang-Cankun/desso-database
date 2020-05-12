@@ -4,7 +4,9 @@
       <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
       <v-toolbar-title style="width: 300px" class="ml-2 pl-4">
         <nuxt-link to="/">
-          <span class="app-bar-title hidden-sm-and-down">{{ title }}</span>
+          <span class="app-bar-title hidden-sm-and-down headline">{{
+            title
+          }}</span>
         </nuxt-link>
       </v-toolbar-title>
       <search-box></search-box>
@@ -108,8 +110,8 @@ export default {
         { icon: 'mdi-table', text: 'Browse', url: '/browse' },
         {
           icon: 'mdi-file-find-outline',
-          text: 'Prediction',
-          url: '/prediction'
+          text: 'Predict',
+          url: '/predict'
         },
         {
           icon: 'mdi-help-box',
