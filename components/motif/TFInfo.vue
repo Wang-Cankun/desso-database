@@ -230,9 +230,16 @@ export default {
           default:
         }
       }
+      info.push({
+        key: 'data',
+        value: 'Download',
+        title: 'ChIP-seq peak: ',
+        link: '/data/test_peak.bed'
+      })
       return info
     }
-  }
+  },
+  created() {}
 }
 </script>
 
