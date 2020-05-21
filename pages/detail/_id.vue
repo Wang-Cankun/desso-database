@@ -65,23 +65,32 @@
                 <v-card-title>
                   Position frequency matrix:
                 </v-card-title>
-                <span>A: </span>
-                <span v-for="item in matrix" :key="item.id">
-                  <span v-if="item.rows == 'A'">{{ item.vals }} </span>
-                </span>
+
+                <v-simple-table>
+                  <template v-slot:default>
+                    <thead>
+                      <tr>
+                        <th>Letter</th>
+                        <th v-for="n in 24" :key="n.name">{{ n }}</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="letter in alphabet" :key="letter.name">
+                        <td>{{ letter }} [</td>
+
+                        <td
+                          v-for="item in currentMatirx(letter)"
+                          :key="item.id"
+                        >
+                          <span>{{ item.vals }}</span>
+                        </td>
+                        <td>]</td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
                 <v-divider></v-divider>
-                <span>C: </span>
-                <span v-for="item in matrix" :key="item.id">
-                  <span v-if="item.rows == 'C'">{{ item.vals }} </span> </span
-                ><v-divider></v-divider>
-                <span>G: </span>
-                <span v-for="item in matrix" :key="item.id">
-                  <span v-if="item.rows == 'A'">{{ item.vals }} </span> </span
-                ><v-divider></v-divider>
-                <span>T: </span>
-                <span v-for="item in matrix" :key="item.id">
-                  <span v-if="item.rows == 'A'">{{ item.vals }} </span> </span
-                ><v-divider></v-divider>
                 <v-card-actions class="card-actions">
                   <a
                     href="/img/motif_logo/test1.jaspar"
@@ -129,7 +138,6 @@
                   :items-per-page="15"
                   :search="search"
                   class="elevation-1"
-                  @click:row="handleClick"
                 ></v-data-table>
               </v-card>
             </v-flex>
@@ -156,6 +164,7 @@ export default {
   },
   data() {
     return {
+      alphabet: ['A', 'C', 'G', 'T'],
       search: '',
       headers: [
         {
@@ -178,7 +187,11 @@ export default {
     tfbs: (state) => state.motifs.tfbs,
     matrix: (state) => state.motifs.matrix
   }),
-
+  methods: {
+    currentMatirx(letter) {
+      return this.matrix.filter((matrix) => matrix.rows === letter)
+    }
+  },
   head() {
     return {
       title: 'Motif details',
