@@ -16,7 +16,7 @@
     "@nuxtjs/markdownit": "^1.2.9",
     "algoliasearch": "^4.2.0",
     "github-markdown-css": "^4.0.0",
-    "highcharts": "^8.0.4",
+    "highcharts": "^9.0.0",
     "highcharts-vue": "^1.3.5",
     "markdown-it-anchor": "^5.2.7",
     "markdown-it-attrs": "^3.0.2",
